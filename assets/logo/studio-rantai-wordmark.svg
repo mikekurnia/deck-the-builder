@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" role="img" aria-label="Studio Rantai">
+  <rect x="4" y="12" width="32" height="21" rx="10" fill="none" stroke="#1F5240" stroke-width="5"/>
+  <rect x="24" y="30" width="32" height="21" rx="10" fill="none" stroke="#C99A45" stroke-width="5"/>
+  <text x="74" y="14" font-family="Space Mono, monospace" font-weight="700" font-size="9" letter-spacing="2" fill="#C99A45">STUDIO</text>
+  <text x="72" y="48" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="34" fill="#0E1512">RANTAI</text>
+</svg>

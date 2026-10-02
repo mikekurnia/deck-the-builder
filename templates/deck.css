@@ -1,0 +1,323 @@
+/* ==========================================================================
+   Deck stylesheet (rides on tokens.css, inlined before this)
+   16:9 slides at 1280x720. Print = one slide per page.
+   All colours come from tokens.css role ramps (--primary-*, --accent-*), so
+   re-skinning the agency never touches this file.
+   --accent-client is set inline per deck to blend the client's colour.
+   ========================================================================== */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root { --accent-client: var(--accent-500); }
+
+html, body {
+  background: var(--slate-200);
+  font-family: var(--font-sans);
+  color: var(--text-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Slide frame ---- */
+.slide {
+  position: relative;
+  width: 1280px;
+  height: 720px;
+  background: var(--color-bg);
+  color: var(--text-strong);
+  overflow: hidden;
+  page-break-after: always;
+  break-after: page;
+  display: flex;
+  flex-direction: column;
+  padding: 72px 84px;
+}
+.slide:last-child { page-break-after: auto; }
+
+/* Dark / brand variants */
+.slide--dark  { background: var(--ink-900); color: var(--text-on-dark); }
+.slide--brand { background: var(--primary-600); color: #fff; }
+.slide--dark .display, .slide--brand .display { color: #fff; }
+
+/* Topographic contour texture on dark bands */
+.slide--dark::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: var(--contour-src);
+  background-size: cover; background-position: center;
+  mix-blend-mode: screen; opacity: 0.24; pointer-events: none;
+}
+.slide > * { position: relative; z-index: 1; }
+
+/* ---- Type ---- */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 13px;
+  color: var(--primary-600);
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-bottom: 22px;
+}
+.slide--dark .eyebrow, .slide--brand .eyebrow { color: var(--accent-400); }
+.eyebrow::before {
+  content: ""; width: 26px; height: 2px; background: currentColor; display: inline-block;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+  color: var(--ink-900);
+}
+.display--xl { font-size: 92px; }
+.display--lg { font-size: 66px; }
+.display--md { font-size: 46px; }
+h2.section-title { font-family: var(--font-display); font-weight: 800; font-size: 40px; letter-spacing: -0.02em; line-height: 1.05; color: var(--ink-900); }
+.slide--dark h2.section-title, .slide--dark .display { color: #fff; }
+.lead { font-size: 20px; line-height: 1.55; color: var(--text-body); max-width: 60ch; }
+.slide--dark .lead { color: var(--primary-200); }
+.muted { color: var(--text-muted); }
+.accent { color: var(--color-accent); }
+.blue { color: var(--primary-600); }
+.hl { color: var(--accent-client); }
+
+/* ---- Footer / page furniture ---- */
+.slide__footer {
+  position: absolute; left: 84px; right: 84px; bottom: 34px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--text-faint);
+}
+.slide--dark .slide__footer, .slide--brand .slide__footer { color: rgba(255,255,255,.5); }
+.slide__logo { height: 22px; }
+
+/* ---- Cover ---- */
+.cover { justify-content: space-between; }
+.cover__lockup { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .2em; font-size: 14px; color: var(--accent-400); }
+.cover__title { margin-top: auto; }
+.cover__meta { display: flex; gap: 40px; margin-top: 28px; font-family: var(--font-mono); font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--primary-200); }
+.cover__brandlogo { height: 40px; margin-bottom: 26px; filter: brightness(0) invert(1); opacity:.95;}
+
+/* ---- Generic grid helpers ---- */
+.row { display: flex; gap: 28px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.spacer { flex: 1; }
+.mt-auto { margin-top: auto; }
+
+/* ---- Card base ---- */
+.card {
+  background: var(--white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg, 16px);
+  padding: 24px;
+}
+.slide--dark .card { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.14); color: #fff; }
+.card__k { font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 8px; }
+.card__t { font-family: var(--font-display); font-weight: 700; font-size: 20px; color: var(--ink-900); margin-bottom: 8px; }
+.slide--dark .card__t { color: #fff; }
+.card__b { font-size: 15px; line-height: 1.5; color: var(--text-body); }
+.slide--dark .card__b { color: var(--primary-200); }
+
+/* ---- Numbered pillars ---- */
+.pillar__num { font-family: var(--font-mono); font-weight: 700; font-size: 13px; color: var(--color-accent); letter-spacing: .1em; }
+
+/* ---- Service chips ---- */
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--color-border); color: var(--text-muted); }
+.chip--on { background: var(--primary-600); color: #fff; border-color: var(--primary-600); }
+
+/* ---- KOL cards (the fix for "KOLs are just names") ---- */
+.kol-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.kol { display: flex; flex-direction: column; gap: 5px; padding: 15px; border: 1px solid var(--color-border); border-radius: 16px; background: #fff; }
+.kol__top { display: flex; align-items: center; gap: 14px; }
+.kol__avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--primary-100); color: var(--primary-700); display: grid; place-items: center; font-family: var(--font-display); font-weight: 800; font-size: 20px; flex: none; overflow: hidden; }
+.kol__avatar img { width: 100%; height: 100%; object-fit: cover; }
+.kol__name { font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--ink-900); line-height: 1.1; }
+.kol__handle { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
+.kol__tier { margin-left: auto; font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; padding: 4px 9px; border-radius: 999px; background: var(--accent-50); color: var(--accent-600); font-weight: 700; }
+.kol__reach { font-size: 13px; color: var(--text-body); margin-top: 6px; }
+.kol__reach b { font-family: var(--font-display); color: var(--primary-600); }
+.kol__fit { font-size: 13px; line-height: 1.4; color: var(--text-muted); }
+.kol__proof { font-family: var(--font-mono); font-size: 11px; color: var(--green-500); margin-top: auto; padding-top: 6px; }
+
+/* ---- 4-box stat strip (reusable component from the real decks) ---- */
+.stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--color-border); border-radius: 14px; overflow: hidden; }
+.stat-strip > div { padding: 13px 18px; border-right: 1px solid var(--color-border); }
+.stat-strip > div:last-child { border-right: none; }
+.stat-strip .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent); }
+.stat-strip .v { font-family: var(--font-display); font-weight: 800; font-size: 22px; color: var(--ink-900); margin-top: 6px; line-height: 1; }
+.stat-strip .s { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+/* ---- Phase timeline ---- */
+.phases { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 0; }
+.phase { padding: 20px 22px; border-left: 3px solid var(--primary-600); position: relative; }
+.phase:nth-child(2){ border-color: var(--primary-500);} .phase:nth-child(3){ border-color: var(--accent-500);} .phase:nth-child(4){ border-color: var(--accent-400);}
+.phase__n { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); }
+.phase__name { font-family: var(--font-display); font-weight: 800; font-size: 22px; color: var(--ink-900); margin: 6px 0; }
+.phase__timing { font-family: var(--font-mono); font-size: 12px; color: var(--color-accent); }
+.phase__list { list-style: none; margin-top: 10px; font-size: 13px; color: var(--text-body); }
+.phase__list li { padding: 3px 0 3px 14px; position: relative; }
+.phase__list li::before { content: "›"; position: absolute; left: 0; color: var(--primary-500); }
+
+/* ---- Big idea ---- */
+.bigidea__name { font-family: var(--font-display); font-weight: 800; font-size: 84px; letter-spacing: -0.03em; line-height: .98; color: #fff; }
+.bigidea__tag { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .16em; font-size: 15px; color: var(--accent-400); margin-top: 18px; }
+.bigidea__body { font-size: 20px; line-height: 1.55; color: var(--primary-200); max-width: 62ch; margin-top: 22px; }
+.bigidea__hook { margin-top: 20px; padding: 16px 20px; border-left: 3px solid var(--accent-500); font-size: 18px; color: #fff; font-style: italic; }
+
+/* ---- Lists ---- */
+.ticks { list-style: none; display: grid; gap: 10px; }
+.ticks li { position: relative; padding-left: 26px; font-size: 15px; line-height: 1.45; color: var(--text-body); }
+.ticks li::before { content: ""; position: absolute; left: 0; top: 7px; width: 12px; height: 12px; border-radius: 3px; background: var(--color-accent); }
+
+/* ---- Investment table ---- */
+.invest { width: 100%; border-collapse: collapse; font-size: 15px; }
+.invest td { padding: 12px 8px; border-bottom: 1px solid var(--color-border); }
+.invest td.amt { text-align: right; font-family: var(--font-display); font-weight: 700; color: var(--ink-900); white-space: nowrap; }
+.invest tr.sub td { color: var(--text-muted); }
+.invest tr.total td { border-top: 2px solid var(--ink-900); border-bottom: none; font-size: 20px; padding-top: 16px; }
+.invest tr.total td.amt { color: var(--primary-600); }
+.terms-bar { display: grid; grid-template-columns: 50fr 30fr 20fr; gap: 4px; margin-top: 18px; }
+.terms-bar > div { padding: 12px 14px; border-radius: 8px; background: var(--primary-50); }
+.terms-bar > div:nth-child(2){ background: var(--primary-100);} .terms-bar > div:nth-child(3){ background: var(--accent-50);}
+.terms-bar .p { font-family: var(--font-display); font-weight: 800; font-size: 24px; color: var(--primary-700); }
+.terms-bar .l { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: var(--text-muted); }
+
+/* ---- Win cards (proof) ---- */
+.win { padding: 20px; border: 1px solid var(--color-border); border-radius: 16px; background: #fff; }
+.win__brand { font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--ink-900); }
+.win__metric { font-family: var(--font-display); font-weight: 800; font-size: 34px; color: var(--primary-600); line-height: 1; margin: 8px 0 2px; }
+.win__goal { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+.win__mult { display: inline-block; margin-top: 8px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--green-500); background: var(--green-100); padding: 3px 8px; border-radius: 999px; }
+.win__kols { font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); margin-top: 10px; }
+
+/* ---- Contact ---- */
+.contact { font-family: var(--font-mono); font-size: 14px; letter-spacing: .04em; line-height: 2; color: var(--primary-200); }
+.contact b { color: #fff; }
+
+/* Provenance micro-label already baked into the string by fmt_stat (e.g. "(est.)") */
+
+/* ========================================================================
+   PHASE 2 — creative-depth slide components
+   ======================================================================== */
+
+/* ---- Insider data (the "we already run your account" advantage) ---- */
+.insider-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 26px; }
+.insider-metric { padding: 22px; border-radius: 16px; background: var(--primary-50); border: 1px solid var(--primary-100); }
+.insider-metric .v { font-family: var(--font-display); font-weight: 800; font-size: 40px; color: var(--primary-600); line-height: 1; }
+.insider-metric .l { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--text-muted); margin-top: 10px; }
+.insider-metric .s { font-size: 13px; color: var(--text-body); margin-top: 6px; }
+
+/* ---- Competitive landscape teardown ---- */
+.comp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 22px; }
+.comp-card { padding: 20px; border: 1px solid var(--color-border); border-radius: 16px; background: #fff; }
+.comp-card .brand { font-family: var(--font-display); font-weight: 800; font-size: 20px; color: var(--ink-900); }
+.comp-card .pos { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); margin-top: 2px; }
+.comp-card .nail { font-size: 14px; color: var(--text-body); margin-top: 12px; }
+.comp-card .adapt { font-size: 14px; color: var(--ink-900); margin-top: 10px; padding-left: 14px; border-left: 3px solid var(--color-accent); }
+.comp-card .adapt b { color: var(--color-accent); font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; display: block; }
+.comp-card .src { font-size: 11px; color: var(--text-faint); margin-top: 8px; font-style: italic; }
+
+/* ---- Storyline (the narrative arc, shown) ---- */
+.storyline { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 0; margin-top: 34px; }
+.beat { position: relative; padding: 0 22px 0 0; }
+.beat__dot { width: 14px; height: 14px; border-radius: 50%; background: var(--primary-600); margin-bottom: 16px; position: relative; }
+.beat:not(:last-child) .beat__dot::after { content: ""; position: absolute; left: 14px; top: 6px; width: calc(100% + 22px); height: 2px; background: var(--slate-200); }
+.beat:nth-child(3) .beat__dot, .beat:nth-child(4) .beat__dot { background: var(--accent-500); }
+.beat__name { font-family: var(--font-display); font-weight: 800; font-size: 20px; color: var(--ink-900); }
+.beat__what { font-size: 14px; color: var(--text-body); margin-top: 8px; line-height: 1.45; }
+.beat__feel { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--color-accent); margin-top: 10px; }
+
+/* ---- Content calendar ---- */
+.cal { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 13.5px; }
+.cal th { text-align: left; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .12em; color: var(--color-accent); padding: 8px 10px; border-bottom: 2px solid var(--ink-900); }
+.cal td { padding: 8px 10px; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+.cal td.day { font-family: var(--font-display); font-weight: 700; color: var(--primary-600); white-space: nowrap; }
+.cal td.fmt { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); text-transform: uppercase; white-space: nowrap; }
+
+/* ---- Content examples (DESIGNED post-cards — show, don't tell) ---- */
+.postcards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 22px; }
+.postcard { border: 1px solid var(--color-border); border-radius: 16px; overflow: hidden; background: #fff; display: flex; flex-direction: column; }
+.postcard__badge { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; padding: 8px 14px; background: var(--ink-900); color: #fff; display: flex; justify-content: space-between; }
+.postcard__badge .plat { color: var(--accent-400); }
+.postcard__visual { aspect-ratio: 4 / 3; background: linear-gradient(135deg, var(--primary-50), var(--slate-100)); display: grid; place-items: center; padding: 16px; text-align: center; position: relative; overflow: hidden; }
+.postcard__visual .concept { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--ink-900); line-height: 1.25; z-index: 1; }
+.postcard__visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.postcard__body { padding: 14px; }
+.postcard__cap { font-size: 12.5px; color: var(--text-body); line-height: 1.45; }
+.postcard__cap .h { color: var(--primary-600); }
+.postcard__cta { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--color-accent); margin-top: 10px; font-weight: 700; }
+
+/* ---- Moodboard ---- */
+.mood { display: grid; grid-template-columns: 2fr 1fr; gap: 22px; margin-top: 22px; align-items: start; }
+.mood-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 130px; gap: 10px; }
+.mood-img { position: relative; border-radius: 12px; overflow: hidden; background: var(--slate-100); }
+.mood-img img { width: 100%; height: 100%; object-fit: cover; }
+.mood-img.wide { grid-column: span 2; }
+.mood-img.tall { grid-row: span 2; }
+.mood-img .ref { position: absolute; top: 8px; left: 8px; font-family: var(--font-mono); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; background: rgba(14,21,18,.72); color: #fff; padding: 3px 7px; border-radius: 6px; }
+.mood-dir .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent); }
+.mood-dir h4 { font-family: var(--font-display); font-weight: 800; font-size: 22px; color: var(--ink-900); margin: 6px 0 12px; line-height: 1.1; }
+.mood-dir .swatches { display: flex; gap: 8px; margin: 14px 0; }
+.mood-dir .sw { width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--color-border); }
+
+/* ========================================================================
+   PHASE 3 — sharper competitive POV, real post-cards, trends
+   ======================================================================== */
+
+/* ---- Competitive: move-centric synthesis ---- */
+.landscape-read { margin-top: 16px; font-size: 16px; line-height: 1.5; color: var(--text-body); max-width: 82ch; }
+.landscape-read .k { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--color-accent); margin-right: 8px; }
+.move-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 22px; }
+.move-card { padding: 20px 22px; border: 1px solid var(--color-border); border-radius: 16px; background: #fff; }
+.move-n { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); }
+.move-h { font-family: var(--font-display); font-weight: 800; font-size: 21px; color: var(--ink-900); margin: 6px 0 8px; line-height: 1.12; }
+.move-why { font-size: 14px; color: var(--text-body); line-height: 1.45; }
+.move-seen { font-size: 12.5px; color: var(--text-muted); margin-top: 12px; padding-left: 12px; border-left: 3px solid var(--accent-client); }
+.move-seen b { color: var(--ink-900); font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+.move-seen .src { font-style: italic; color: var(--text-faint); }
+
+/* ---- Post-cards: realistic IG/TikTok mockups ---- */
+.pc-head { display: flex; align-items: center; gap: 9px; padding: 11px 12px; }
+.pc-av { width: 28px; height: 28px; border-radius: 50%; background: var(--accent-client); color: #fff; display: grid; place-items: center; font-family: var(--font-display); font-weight: 800; font-size: 13px; flex: none; }
+.pc-handle { font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--ink-900); line-height: 1.05; }
+.pc-handle .pc-sub { display: block; font-family: var(--font-sans); font-weight: 400; font-size: 10px; color: var(--text-muted); }
+.pc-fmt { margin-left: auto; font-family: var(--font-mono); font-size: 9px; letter-spacing: .07em; text-transform: uppercase; color: var(--text-muted); }
+.pc-visual { position: relative; aspect-ratio: 1 / 1; max-height: 285px; background: linear-gradient(150deg, var(--primary-50), var(--slate-200)); display: grid; place-items: center; overflow: hidden; }
+.pc-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pc-scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(14,21,18,.6), transparent 55%); }
+.pc-concept { position: relative; z-index: 1; padding: 16px; text-align: center; font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--ink-900); line-height: 1.25; }
+.pc-concept.on-photo { align-self: end; text-align: left; color: #fff; text-shadow: 0 1px 8px rgba(0,0,0,.5); font-size: 14px; }
+.pc-ref { position: absolute; top: 8px; right: 8px; z-index: 2; font-family: var(--font-mono); font-size: 8px; letter-spacing: .06em; text-transform: uppercase; background: rgba(14,21,18,.72); color: #fff; padding: 3px 6px; border-radius: 5px; }
+.pc-eng { display: flex; gap: 12px; padding: 9px 12px 2px; font-size: 15px; color: var(--ink-900); }
+.pc-eng .pc-save { margin-left: auto; }
+.pc-cap { padding: 3px 12px 4px; font-size: 12px; color: var(--text-body); line-height: 1.4; }
+.pc-cap b { color: var(--ink-900); }
+.pc-cta { padding: 3px 12px 14px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .05em; text-transform: uppercase; color: var(--color-accent); font-weight: 700; }
+
+/* ---- Trends ---- */
+.trend-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 22px; }
+.trend-card { padding: 18px 20px; border: 1px solid var(--color-border); border-radius: 16px; background: #fff; }
+.trend-h { font-family: var(--font-display); font-weight: 800; font-size: 19px; color: var(--ink-900); }
+.trend-what { font-size: 13.5px; color: var(--text-body); margin-top: 6px; line-height: 1.45; }
+.trend-play { font-size: 13.5px; color: var(--ink-900); margin-top: 10px; padding-left: 12px; border-left: 3px solid var(--color-accent); }
+.trend-play b { display: block; font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 2px; }
+.trend-card .src { font-size: 11px; color: var(--text-faint); font-style: italic; margin-top: 8px; }
+
+/* ---- Conversion (the payoff funnel) ---- */
+.conv-intro { margin-top: 12px; max-width: 80ch; font-size: 16px; line-height: 1.5; color: var(--primary-200); }
+.conv-flow { display: flex; align-items: stretch; gap: 6px; margin-top: 26px; }
+.conv-step { flex: 1; display: flex; flex-direction: column; padding: 20px 18px; border: 1px solid rgba(255,255,255,.14); border-radius: 16px; background: rgba(255,255,255,.05); }
+.conv-step__stage { font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-400); }
+.conv-step__metric { font-family: var(--font-display); font-weight: 800; font-size: 25px; line-height: 1.1; letter-spacing: -.02em; color: var(--accent-client); margin: 10px 0 8px; }
+.conv-step__note { font-size: 12.5px; line-height: 1.45; color: rgba(255,255,255,.72); margin-top: auto; }
+.conv-arrow { flex: none; align-self: center; font-size: 22px; color: rgba(255,255,255,.35); padding: 0 2px; }
+.conv-assets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
+.conv-asset { padding: 14px 16px; border-radius: 12px; background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.08); }
+.conv-asset__t { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-400); }
+.conv-asset__b { font-size: 12.5px; line-height: 1.45; color: rgba(255,255,255,.72); margin-top: 6px; }
+.conv-foot { margin-top: 16px; font-size: 11px; font-style: italic; line-height: 1.4; color: rgba(255,255,255,.5); max-width: 92ch; }

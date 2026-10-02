@@ -1,0 +1,20 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Secrets & local overrides
+.env
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Scratch / disposable
+.tmp/
+.DS_Store
+
+# Real client work never goes in git. The committed demo lives in examples/.
+proposals/
+
+# Intermediate render (large, regenerable from deck.json)
+examples/*/deck.html

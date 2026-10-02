@@ -1,0 +1,30 @@
+{
+  "_comment": "Canonical proposal flow (Phase 2: creative-depth). 'required' slides always appear; 'optional' are dropped when not relevant; 'service_gated' appear only if that service is in the mix; 'client_gated: existing' appears only for clients whose socials we already run. Target 14-18 slides — drop any slide that doesn't earn its place. The deck engine reads this order; deck.json lists the actual slides chosen.",
+  "slide_order": [
+    { "type": "cover", "required": true, "note": "Brand x Agency lockup + campaign theme" },
+    { "type": "about_agency", "required": true, "note": "Who we are + the relevant services" },
+    { "type": "insider_data", "client_gated": "existing", "note": "Real metrics from the account we already run — our unfair advantage" },
+    { "type": "understanding_brand", "required": true, "note": "Their challenge, in their words" },
+    { "type": "competitive_landscape", "optional": true, "note": "Move-centric: a market read + 2-4 'moves we adapt' (competitors as evidence, not a roll-call)" },
+    { "type": "trends", "optional": true, "note": "Current IG/TikTok trends for the category + our play (dated + sourced; re-pulled each pitch)" },
+    { "type": "big_idea", "required": true, "note": "THE narrative. Name it." },
+    { "type": "storyline", "optional": true, "note": "The campaign as a narrative arc, beat by beat — SHOW 'we build narratives'" },
+    { "type": "strategic_approach", "required": true, "note": "How we tackle it — the framework" },
+    { "type": "content_pillars", "optional": true, "note": "3-4 content pillars: theme + why + formats" },
+    { "type": "content_calendar", "optional": true, "note": "Day/week x format grid for the window" },
+    { "type": "content_examples", "optional": true, "note": "DESIGNED post-cards: format + concept + real caption + CTA" },
+    { "type": "phases_timeline", "optional": true, "note": "Phases + timing (fold into calendar for short campaigns)" },
+    { "type": "service_breakdown", "required": true, "note": "Scope per active service line" },
+    { "type": "proposed_kols", "required": true, "note": "KOL CARDS: roster + fresh discovered faces (to-vet)" },
+    { "type": "creative_crew", "service_gated": "content", "note": "Photographer/videographer/editor/MUA/etc." },
+    { "type": "moodboard", "optional": true, "note": "Aesthetic direction: client photos (hero) + labeled references" },
+    { "type": "deliverables", "required": true, "note": "Everything the client receives" },
+    { "type": "campaign_wins", "optional": true, "note": "Proof: real past results matched to category (verified only)" },
+    { "type": "investment", "optional": true, "note": "IDR line items + 50/30/20. OPTIONAL — omit until pricing is ready" },
+    { "type": "conversion", "optional": true, "note": "The payoff funnel: what the investment converts into (awareness→interest→intent→bookings). All figures provenance=target, benchmarked to verified wins" },
+    { "type": "scope_summary", "optional": true, "note": "Pricing-deferred fallback: 'what's included — investment to follow'" },
+    { "type": "why_agency", "required": true, "note": "The philosophy line from config/brand.json" },
+    { "type": "next_steps", "required": true, "note": "CTA + contact block" }
+  ],
+  "guidance": "Lead with craft, not price. Use insider_data only for existing clients. Show the storyline + designed content_examples — that's the differentiator. Include EITHER investment OR scope_summary, not both. Never ship a placeholder image or an empty KOL slide."
+}

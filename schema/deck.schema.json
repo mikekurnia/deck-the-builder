@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/deck-the-builder/deck.schema.json",
+  "title": "Proposal Deck",
+  "description": "Contract for deck.json. Validated by verify_outputs.py before rendering. A 'stat' number is either a plain string/number (author-controlled) or an object that MUST carry a provenance tag so no AI estimate is ever printed as fact.",
+  "type": "object",
+  "required": [
+    "meta",
+    "slides"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": [
+        "brand",
+        "campaign_title"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "brand": {
+          "type": "string",
+          "minLength": 1
+        },
+        "brand_slug": {
+          "type": "string"
+        },
+        "campaign_title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "date": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string",
+          "enum": [
+            "en",
+            "id"
+          ]
+        },
+        "accent_hex": {
+          "type": "string",
+          "pattern": "^#([0-9a-fA-F]{6})$"
+        },
+        "tagline": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "notes",
+            "cold"
+          ]
+        }
+      }
+    },
+    "slides": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "cover",
+              "about_agency",
+              "understanding_brand",
+              "insider_data",
+              "competitive_landscape",
+              "trends",
+              "big_idea",
+              "storyline",
+              "strategic_approach",
+              "campaign_routes",
+              "kpi",
+              "content_pillars",
+              "content_calendar",
+              "content_examples",
+              "phases_timeline",
+              "service_breakdown",
+              "proposed_kols",
+              "creative_crew",
+              "deliverables",
+              "moodboard",
+              "campaign_wins",
+              "investment",
+              "conversion",
+              "scope_summary",
+              "why_agency",
+              "next_steps",
+              "data_table",
+              "pie_chart"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "stat": {
+      "description": "A number with provenance. Object form REQUIRES a provenance tag.",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "object",
+          "required": [
+            "value",
+            "provenance"
+          ],
+          "properties": {
+            "value": {
+              "type": [
+                "number",
+                "string"
+              ]
+            },
+            "provenance": {
+              "type": "string",
+              "enum": [
+                "verified",
+                "estimate",
+                "target"
+              ]
+            },
+            "unit": {
+              "type": "string"
+            },
+            "compact": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

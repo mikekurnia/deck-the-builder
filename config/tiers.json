@@ -1,0 +1,41 @@
+{
+  "_comment": "KOL tiers (Indonesian naming). Follower + est-reach bands are REFERENCE ranges only \u2014 any number derived from them must be rendered as 'est.' (provenance=estimate), never as fact. Rates are never derived here; they come from the roster.",
+  "tiers": [
+    {
+      "key": "Nano",
+      "label": "Nano",
+      "followers_min": 1000,
+      "followers_max": 10000,
+      "est_reach_per_post_min": 500,
+      "est_reach_per_post_max": 4000,
+      "best_for": "Hyper-local trust, authentic UGC, high engagement rate"
+    },
+    {
+      "key": "Mikro",
+      "label": "Mikro (Micro)",
+      "followers_min": 10000,
+      "followers_max": 100000,
+      "est_reach_per_post_min": 4000,
+      "est_reach_per_post_max": 40000,
+      "best_for": "Niche communities, strong conversion, cost-efficient reach"
+    },
+    {
+      "key": "Makro",
+      "label": "Makro (Macro)",
+      "followers_min": 100000,
+      "followers_max": 1000000,
+      "est_reach_per_post_min": 40000,
+      "est_reach_per_post_max": 400000,
+      "best_for": "Category authority, broad awareness, premium positioning"
+    },
+    {
+      "key": "Mega",
+      "label": "Mega",
+      "followers_min": 1000000,
+      "followers_max": 100000000,
+      "est_reach_per_post_min": 400000,
+      "est_reach_per_post_max": 5000000,
+      "best_for": "Mass awareness, launch moments, cultural reach"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "_comment": "SAMPLE DATA — every campaign below is FICTIONAL and exists only to demonstrate the proof engine. In a real deployment this file holds the agency's own verified past results (provenance=verified). The proof engine matches these to a client's category to fill the Campaign-Wins slide. goal/achieved are view counts.",
+  "sample_data": true,
+  "campaigns": [
+    {
+      "brand": "Sample Brand A — Morning Ritual",
+      "category": "fnb",
+      "platform": "TikTok/IG",
+      "goal_views": 300000,
+      "achieved_views": 512000,
+      "kols": "8",
+      "note": "Fictional cafe opening (sample)"
+    },
+    {
+      "brand": "Sample Brand B — Late Shift",
+      "category": "fnb",
+      "platform": "IG",
+      "goal_views": 150000,
+      "achieved_views": 204000,
+      "kols": "5",
+      "note": "Fictional bakery launch (sample)"
+    },
+    {
+      "brand": "Sample Brand C — Pour Over Club",
+      "category": "fnb",
+      "platform": "TikTok",
+      "goal_views": 80000,
+      "achieved_views": 176000,
+      "kols": "4",
+      "note": "Fictional specialty-coffee community (sample)"
+    },
+    {
+      "brand": "Sample Brand D — Glow Week",
+      "category": "beauty",
+      "platform": "TikTok/IG",
+      "goal_views": 500000,
+      "achieved_views": 640000,
+      "kols": "10",
+      "note": "Fictional skincare launch (sample)"
+    },
+    {
+      "brand": "Sample Brand E — Court Days",
+      "category": "sports",
+      "platform": "IG",
+      "goal_views": 60000,
+      "achieved_views": 150000,
+      "kols": "6",
+      "note": "Fictional sports club (sample)"
+    },
+    {
+      "brand": "Sample Brand F — Sunday Stretch",
+      "category": "sports",
+      "platform": "IG",
+      "goal_views": 40000,
+      "achieved_views": 52000,
+      "kols": "3",
+      "note": "Fictional studio (sample)"
+    },
+    {
+      "brand": "Sample Brand G — Quiet Hours",
+      "category": "spa",
+      "platform": "IG",
+      "goal_views": 100000,
+      "achieved_views": 121000,
+      "kols": "4",
+      "note": "Fictional wellness spa (sample)"
+    }
+  ],
+  "agency_stats": {
+    "total_campaign_views": "2.1M+ (sample)",
+    "brand_collaborations": "18 (sample)",
+    "kols_network": "25 demo creators",
+    "note": "Sample headline stats for the fictional agency."
+  }
+}

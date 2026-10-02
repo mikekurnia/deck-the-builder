@@ -1,0 +1,41 @@
+{
+  "_comment": "Starting points for the competitive-research step. These are HYPOTHESES for the researcher to verify via live web search \u2014 nothing here is a claim. Always add local comparables; the local angle lands hardest with clients. Entries are generic archetypes, not named brands.",
+  "by_category": {
+    "fnb": {
+      "archetypes": [
+        {
+          "archetype": "Grab-and-go chain",
+          "positioning": "speed + price",
+          "watch_for": "app promos, bundle deals, delivery-first content"
+        },
+        {
+          "archetype": "Specialty third-wave cafe",
+          "positioning": "craft + origin",
+          "watch_for": "barista-led content, brew guides, cupping events"
+        },
+        {
+          "archetype": "Neighbourhood hangout",
+          "positioning": "community + space",
+          "watch_for": "regulars' stories, live music nights, WFC culture"
+        }
+      ],
+      "local": "RESEARCH LIVE \u2014 find current local coffee chains and how they run social."
+    },
+    "beauty": {
+      "archetypes": [
+        {
+          "archetype": "Community-first skincare",
+          "positioning": "UGC + reviews",
+          "watch_for": "creator seeding, routine content"
+        },
+        {
+          "archetype": "Purpose-led brand",
+          "positioning": "values + founder story",
+          "watch_for": "cause tie-ins"
+        }
+      ],
+      "local": "RESEARCH LIVE \u2014 local beauty brands and their creator/affiliate playbooks."
+    }
+  },
+  "how_to_use": "Pull 3-4 comparables (mix global + at least one local). For each: what they nail, then the ONE tactic we adapt for this client. Verify current behaviour before putting it on a slide."
+}

@@ -1,0 +1,161 @@
+/* ==========================================================================
+   Agency brand tokens — Studio Rantai (fictional demo agency)
+   Swap this file + config/brand.json + assets/logo/* to re-skin the factory.
+   Palette: deep forest green (primary) + warm sand (accent) on white / ink.
+   Ramp names are role-based (--primary-*, --accent-*) so templates never
+   hard-code a hue.
+   ========================================================================== */
+
+:root {
+  /* ---- Primary ramp: deep forest green ---- */
+  --primary-950: #07170F;
+  --primary-900: #0D2419;
+  --primary-800: #143425;
+  --primary-700: #19432F;
+  --primary-600: #1F5240; /* ★ brand primary */
+  --primary-500: #2D6A53;
+  --primary-400: #4B8A70;
+  --primary-300: #7FAE98;
+  --primary-200: #B7D3C4;
+  --primary-100: #DDEBE3;
+  --primary-50:  #EFF6F2;
+
+  /* ---- Ink / neutral ramp ---- */
+  --ink-950: #070B09;
+  --ink-900: #0E1512;
+  --ink-800: #18211D;
+  --slate-700: #323B37;
+  --slate-600: #4A5450;
+  --slate-500: #6B7571;
+  --slate-400: #9AA39F;
+  --slate-300: #CBD1CE;
+  --slate-200: #E4E8E6;
+  --slate-100: #F2F4F3;
+  --slate-50:  #F9FAF9;
+  --white: #FFFFFF;
+
+  /* ---- Accent ramp: warm sand ---- */
+  --accent-700: #8E6420;
+  --accent-600: #AD7E30;
+  --accent-500: #C99A45; /* ★ brand accent */
+  --accent-400: #DDB66C;
+  --accent-200: #EFDBB2;
+  --accent-100: #F7ECD6;
+  --accent-50:  #FCF7EC;
+
+  /* ---- Semantic status ---- */
+  --green-500: #18A957;
+  --green-100: #D6F4E1;
+  --red-500:   #E5484D;
+  --red-100:   #FBDDDE;
+  --amber-warn: #F2A516;
+
+  /* ===================== Semantic aliases ===================== */
+  --color-bg:            var(--white);
+  --color-bg-subtle:     var(--slate-50);
+  --color-surface:       var(--white);
+  --color-surface-sunken:var(--slate-100);
+  --color-ink-surface:   var(--ink-900);
+  --color-brand-surface: var(--primary-600);
+
+  --text-strong:   var(--ink-900);
+  --text-body:     var(--slate-700);
+  --text-muted:    var(--slate-500);
+  --text-faint:    var(--slate-400);
+  --text-on-dark:  var(--white);
+  --text-on-dark-muted: var(--primary-200);
+  --text-on-primary: var(--white);
+  --text-link:     var(--primary-600);
+
+  --color-primary:        var(--primary-600);
+  --color-primary-hover:  var(--primary-700);
+  --color-primary-active: var(--primary-800);
+  --color-primary-soft:   var(--primary-50);
+  --color-accent:         var(--accent-500);
+  --color-accent-hover:   var(--accent-600);
+  --color-accent-soft:    var(--accent-50);
+
+  --color-border:        var(--slate-200);
+  --color-border-strong: var(--slate-300);
+  --color-border-ink:    var(--ink-900);
+  --color-focus-ring:    var(--primary-400);
+
+  --color-success: var(--green-500);
+  --color-danger:  var(--red-500);
+  --color-warning: var(--amber-warn);
+
+  --texture-contour: url('../assets/texture/contour-texture.png'); /* @kind other */
+}
+/* ==========================================================================
+   Typography tokens
+   Display + body: Plus Jakarta Sans · Eyebrows / mono: Space Mono (both OFL)
+   ========================================================================== */
+:root {
+  --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-sans:    'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono:    'Space Mono', ui-monospace, monospace;
+
+  --fw-regular:   400;
+  --fw-medium:    500;
+  --fw-semibold:  600;
+  --fw-bold:      700;
+  --fw-extrabold: 800;
+
+  --fs-display-xl: clamp(3rem, 6vw, 5.5rem);
+  --fs-display-lg: clamp(2.4rem, 4vw, 4rem);
+  --fs-h1: clamp(2rem, 2.4vw, 3rem);
+  --fs-h2: clamp(1.6rem, 1.4vw, 2.25rem);
+  --fs-h3: 1.5rem;
+  --fs-h4: 1.25rem;
+  --fs-body-lg: 1.125rem;
+  --fs-body:    1rem;
+  --fs-body-sm: 0.9375rem;
+  --fs-caption: 0.8125rem;
+  --fs-eyebrow: 0.75rem;
+
+  --lh-tight:   1.04;
+  --lh-snug:    1.18;
+  --lh-heading: 1.12;
+  --lh-body:    1.6;
+  --lh-relaxed: 1.75;
+
+  --ls-tighter: -0.03em;
+  --ls-tight:   -0.015em;
+  --ls-normal:  0;
+  --ls-eyebrow: 0.18em;
+  --ls-caps:    0.08em;
+}
+/* ==========================================================================
+   Spacing & layout tokens (4px grid)
+   ========================================================================== */
+:root {
+  --space-0: 0;  --space-1: 4px;  --space-2: 8px;  --space-3: 12px;
+  --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-8: 32px;
+  --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-20: 80px;
+  --space-24: 96px; --space-32: 128px;
+  --container-max: 1200px;
+  --container-pad: clamp(20px, 5vw, 64px);
+  --section-y: clamp(64px, 9vw, 128px);
+  --gutter: 24px;
+}
+/* ==========================================================================
+   Effects: radii, shadows, borders, motion
+   ========================================================================== */
+:root {
+  --radius-xs: 4px; --radius-sm: 6px; --radius-md: 10px; --radius-lg: 16px;
+  --radius-xl: 22px; --radius-2xl: 32px; --radius-pill: 999px;
+
+  --shadow-xs: 0 1px 2px rgba(14, 21, 18, 0.06);
+  --shadow-sm: 0 2px 6px rgba(14, 21, 18, 0.07);
+  --shadow-md: 0 8px 24px rgba(14, 40, 30, 0.10);
+  --shadow-lg: 0 18px 48px rgba(14, 40, 30, 0.14);
+  --shadow-brand: 0 14px 34px rgba(31, 82, 64, 0.28);
+
+  --border-hair: 1px;
+  --border-bold: 2px;
+  --ring: 0 0 0 3px rgba(75, 138, 112, 0.45);
+
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms; --dur-base: 200ms; --dur-slow: 360ms;
+}

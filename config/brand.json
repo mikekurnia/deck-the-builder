@@ -1,0 +1,63 @@
+{
+  "_comment": "The ONE place the agency identity lives. Swap this file + templates/tokens.css + assets/logo/* to re-skin the whole factory for another agency. Studio Rantai is a FICTIONAL agency used for this public demo.",
+  "name": "Studio Rantai",
+  "short_name": "Rantai",
+  "legal_name": "Studio Rantai (fictional demo agency)",
+  "city": "Jakarta",
+  "tagline": "Narrative-first creative studio",
+  "philosophy": "Ideas before price lists. We build narratives.",
+  "mission": "Connect brands with like-minded creators through campaigns that start from a story, not a rate card.",
+  "pillars": [
+    {
+      "label": "Insight first",
+      "desc": "Every campaign starts from a human truth about the audience, not a product feature."
+    },
+    {
+      "label": "Story second",
+      "desc": "We turn that insight into a named idea with an arc creators can actually tell."
+    },
+    {
+      "label": "Craft always",
+      "desc": "Briefing, production and reporting run on checklists, so the idea survives execution."
+    }
+  ],
+  "stats_sample": [
+    {
+      "label": "Campaign views (sample)",
+      "value": "2.1M+"
+    },
+    {
+      "label": "Brand projects (sample)",
+      "value": "18"
+    },
+    {
+      "label": "Creator network (sample)",
+      "value": "25 demo"
+    },
+    {
+      "label": "Avg. vs target (sample)",
+      "value": "1.6x"
+    }
+  ],
+  "handle": "@studio.rantai",
+  "contact": {
+    "address": "Jl. Contoh Raya No. 1, Jakarta (fictional)",
+    "ig": "@studio.rantai",
+    "wa": "+62 800 0000 0000",
+    "email": "hello@studio-rantai.example",
+    "web": "studio-rantai.example"
+  },
+  "colors": {
+    "primary": "#1F5240",
+    "accent": "#C99A45",
+    "ink": "#0E1512",
+    "surface": "#FFFFFF"
+  },
+  "assets": {
+    "logo_color": "assets/logo/studio-rantai-wordmark-color.png",
+    "logo_white": "assets/logo/studio-rantai-wordmark-white.png",
+    "texture": "assets/texture/contour-texture.png"
+  },
+  "currency": "IDR",
+  "default_language": "en"
+}

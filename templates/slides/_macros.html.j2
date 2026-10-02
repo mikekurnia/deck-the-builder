@@ -1,0 +1,651 @@
+{# ========================================================================
+   Deck slide macros. render() dispatches on s.type.
+   Imported `with context`, so every macro can read `agency` (config/brand.json).
+   Each macro receives the slide dict `s`, the deck `meta`, `assets` (data URIs),
+   `fmt_stat` (provenance-aware number renderer) and `rp` (IDR formatter).
+   ======================================================================== #}
+
+{% macro foot(meta, assets, n, total, dark=false) %}
+<div class="slide__footer">
+  <img class="slide__logo" src="{{ dark and assets.logo_white or assets.logo_color }}" alt="{{ agency.name }}">
+  <span>{{ agency.handle }} · {{ meta.brand }}</span>
+  <span>{{ '%02d'|format(n) }} / {{ '%02d'|format(total) }}</span>
+</div>
+{% endmacro %}
+
+{# ---------- COVER ---------- #}
+{% macro cover(s, meta, assets, n, total) %}
+<section class="slide slide--dark cover">
+  <div>
+    {% if assets.brand_logo %}<img class="cover__brandlogo" src="{{ assets.brand_logo }}" alt="{{ meta.brand }}"{% if meta.logo_keep_color %} style="filter:none; opacity:1; height:92px; border-radius:50%"{% endif %}>{% endif %}
+    <div class="cover__lockup">{{ meta.brand }} &nbsp;×&nbsp; {{ agency.name }}</div>
+  </div>
+  <div class="cover__title">
+    <div class="eyebrow">{{ s.eyebrow|default('Campaign Proposal') }}</div>
+    <h1 class="display display--xl">{{ s.title|default(meta.campaign_title) }}</h1>
+    {% if s.subtitle %}<p class="lead" style="margin-top:20px">{{ s.subtitle }}</p>{% endif %}
+    <div class="cover__meta">
+      <span>{{ meta.date|default('2026') }}</span>
+      <span>Prepared for {{ meta.brand }}</span>
+      <span>{{ agency.tagline }}</span>
+    </div>
+  </div>
+  {{ foot(meta, assets, n, total, true) }}
+</section>
+{% endmacro %}
+
+{# ---------- ABOUT THE AGENCY ---------- #}
+{% macro about_agency(s, meta, assets, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('About ' ~ agency.name) }}</div>
+  <h2 class="section-title" style="max-width:20ch">{{ s.title|default(agency.philosophy) }}</h2>
+  {% if s.blurb %}<p class="lead" style="margin-top:16px">{{ s.blurb }}</p>{% endif %}
+  <div class="grid-4" style="margin-top:28px">
+    {% for sv in s.services|default([]) %}
+    <div class="card">
+      <div class="card__k">{{ sv.active and 'In this campaign' or 'Also offer' }}</div>
+      <div class="card__t" style="font-size:17px">{{ sv.name }}</div>
+      <div class="card__b" style="font-size:13px">{{ sv.tagline|default('') }}</div>
+    </div>
+    {% endfor %}
+  </div>
+  {% set stats = s.stats|default(agency.stats_sample) %}{% if stats %}
+  <div class="stat-strip" style="margin-top:auto">
+    {% for st in stats %}<div><div class="k">{{ st.label }}</div><div class="v">{{ st.value }}</div></div>{% endfor %}
+  </div>
+  {% endif %}
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- UNDERSTANDING THE BRAND ---------- #}
+{% macro understanding_brand(s, meta, assets, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('Understanding ' ~ meta.brand) }}</div>
+  <h2 class="section-title" style="max-width:24ch">{{ s.title|default('The situation') }}</h2>
+  <div class="grid-2" style="margin-top:28px; align-items:start">
+    <p class="lead">{{ s.body|default('') }}</p>
+    <ul class="ticks">
+      {% for p in s.points|default([]) %}<li>{{ p }}</li>{% endfor %}
+    </ul>
+  </div>
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- BIG IDEA ---------- #}
+{% macro big_idea(s, meta, assets, n, total) %}
+<section class="slide slide--dark">
+  <div class="eyebrow">{{ s.eyebrow|default('The Big Idea') }}</div>
+  <div class="mt-auto"></div>
+  <div class="bigidea__name">{{ s.idea_name|default(s.title) }}</div>
+  {% if s.tagline %}<div class="bigidea__tag">{{ s.tagline }}</div>{% endif %}
+  {% if s.narrative %}<p class="bigidea__body">{{ s.narrative }}</p>{% endif %}
+  {% if s.hook %}<div class="bigidea__hook">“{{ s.hook }}”</div>{% endif %}
+  <div class="mt-auto"></div>
+  {{ foot(meta, assets, n, total, true) }}
+</section>
+{% endmacro %}
+
+{# ---------- STRATEGIC APPROACH ---------- #}
+{% macro strategic_approach(s, meta, assets, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('How We Tackle It') }}</div>
+  <h2 class="section-title">{{ s.title|default('Strategic approach') }}
+    {% if s.framework %}<span class="muted" style="font-size:20px"> · {{ s.framework }}</span>{% endif %}</h2>
+  <div class="grid-3" style="margin-top:30px">
+    {% for p in s.pillars|default([]) %}
+    <div class="card">
+      <div class="pillar__num">0{{ loop.index }}</div>
+      <div class="card__t">{{ p.label }}</div>
+      <div class="card__b">{{ p.desc }}</div>
+    </div>
+    {% endfor %}
+  </div>
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- PHASES & TIMELINE ---------- #}
+{% macro phases_timeline(s, meta, assets, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('Campaign Phases & Timeline') }}</div>
+  <h2 class="section-title">{{ s.title|default('The roll-out') }}</h2>
+  <div class="phases" style="margin-top:34px">
+    {% for ph in s.phases|default([]) %}
+    <div class="phase">
+      <div class="phase__n">Phase 0{{ loop.index }}</div>
+      <div class="phase__name">{{ ph.name }}</div>
+      <div class="phase__timing">{{ ph.timing|default('') }}</div>
+      <ul class="phase__list">{% for d in ph.deliverables|default([]) %}<li>{{ d }}</li>{% endfor %}</ul>
+    </div>
+    {% endfor %}
+  </div>
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- SERVICE BREAKDOWN ---------- #}
+{% macro service_breakdown(s, meta, assets, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('Service Breakdown') }}</div>
+  <h2 class="section-title">{{ s.title|default('What we put to work') }}</h2>
+  <div class="grid-2" style="margin-top:26px; align-items:start">
+    {% for sv in s.services|default([]) %}
+    <div class="card">
+      <div class="card__k">Service</div>
+      <div class="card__t">{{ sv.name }}</div>
+      {% if sv.tagline %}<div class="card__b" style="margin-bottom:8px">{{ sv.tagline }}</div>{% endif %}
+      <ul class="ticks" style="margin-top:8px">{% for d in sv.deliverables|default([]) %}<li style="font-size:14px">{{ d }}</li>{% endfor %}</ul>
+    </div>
+    {% endfor %}
+  </div>
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- PROPOSED KOLS (cards) ---------- #}
+{% macro proposed_kols(s, meta, assets, fmt_stat, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('Proposed KOLs') }}</div>
+  <h2 class="section-title">{{ s.title|default('The creators who fit') }}</h2>
+  <div class="kol-grid" style="margin-top:22px">
+    {% for k in s.kols|default([]) %}
+    {% set parts = k.name.split() %}
+    <div class="kol">
+      <div class="kol__top">
+        <div class="kol__avatar">{% if k.avatar %}<img src="{{ k.avatar }}">{% else %}{{ (parts[0][:1] ~ (parts[1][:1] if parts|length>1 else ''))|upper }}{% endif %}</div>
+        <div>
+          <div class="kol__name">{{ k.name }}</div>
+          <div class="kol__handle">{{ k.handle|default(k.ig_handle)|default('') }}</div>
+        </div>
+        {% if k.tier %}<div class="kol__tier">{{ k.tier }}</div>{% endif %}
+      </div>
+      {% if k.reach %}<div class="kol__reach">Reach <b>{{ fmt_stat(k.reach) }}</b></div>{% endif %}
+      {% if k.fit %}<div class="kol__fit">{{ k.fit }}</div>{% endif %}
+      {% if k.proof %}<div class="kol__proof">✓ {{ k.proof }}</div>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% if s.stat_strip %}
+  <div class="stat-strip" style="margin-top:auto">
+    {% for st in s.stat_strip %}<div><div class="k">{{ st.label }}</div><div class="v">{{ st.value }}</div>{% if st.sub %}<div class="s">{{ st.sub }}</div>{% endif %}</div>{% endfor %}
+  </div>
+  {% endif %}
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- CREATIVE CREW ---------- #}
+{% macro creative_crew(s, meta, assets, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('Creative Crew') }}</div>
+  <h2 class="section-title">{{ s.title|default('The team behind the camera') }}</h2>
+  <div class="grid-3" style="margin-top:26px">
+    {% for c in s.crew|default([]) %}
+    <div class="card">
+      <div class="card__k">{{ c.role }}</div>
+      <div class="card__t" style="font-size:18px">{{ c.name|default('To be assigned') }}</div>
+      <div class="card__b">{{ c.style|default('') }}{% if c.note %} — {{ c.note }}{% endif %}</div>
+    </div>
+    {% endfor %}
+  </div>
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- DELIVERABLES ---------- #}
+{% macro deliverables(s, meta, assets, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('Deliverables') }}</div>
+  <h2 class="section-title">{{ s.title|default('What you receive') }}</h2>
+  <div class="grid-2" style="margin-top:26px; align-items:start">
+    {% for g in s.groups|default([]) %}
+    <div>
+      <div class="card__k" style="color:var(--primary-600)">{{ g.service }}</div>
+      <ul class="ticks" style="margin-top:10px">{% for it in g['items']|default([]) %}<li>{{ it }}</li>{% endfor %}</ul>
+    </div>
+    {% endfor %}
+  </div>
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- CAMPAIGN WINS (proof) ---------- #}
+{% macro campaign_wins(s, meta, assets, fmt_stat, n, total) %}
+<section class="slide slide--dark">
+  <div class="eyebrow">{{ s.eyebrow|default('Campaign Wins') }}</div>
+  <h2 class="section-title">{{ s.title|default('We have done this before — and beaten the target') }}</h2>
+  <div class="grid-3" style="margin-top:28px">
+    {% for w in s.wins|default([]) %}
+    <div class="win">
+      <div class="win__brand">{{ w.brand }}</div>
+      <div class="win__metric">{{ fmt_stat(w.metric) }}</div>
+      <div class="win__goal">goal {{ fmt_stat(w.goal) }}</div>
+      {% if w.mult %}<span class="win__mult">{{ w.mult }} of target</span>{% endif %}
+      {% if w.kols %}<div class="win__kols">from {{ w.kols }} KOL{{ '' if w.kols == '1' else 's' }}{% if w.sow %} · {{ w.sow }}{% endif %}</div>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {{ foot(meta, assets, n, total, true) }}
+</section>
+{% endmacro %}
+
+{# ---------- INVESTMENT ---------- #}
+{% macro investment(s, meta, assets, fmt_stat, rp, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('Investment') }}</div>
+  <h2 class="section-title">{{ s.title|default('The investment') }}</h2>
+  {% if s.line_items or s.total is defined %}
+  <div class="grid-2" style="margin-top:22px; align-items:start; gap:44px">
+    <table class="invest">
+      {% for li in s.line_items|default([]) %}
+      <tr><td>{{ li.label }}</td><td class="amt">{{ rp(li.amount|default(0)) }}{% if li.provenance == 'estimate' %} <span class="muted" style="font-size:12px">est.</span>{% endif %}</td></tr>
+      {% endfor %}
+      {% if s.agency_fee %}<tr class="sub"><td>Agency fee ({{ s.agency_fee_pct|default(10) }}%)</td><td class="amt">{{ rp(s.agency_fee) }}</td></tr>{% endif %}
+      {% if s.tax %}<tr class="sub"><td>{{ s.tax_label|default('Tax') }}</td><td class="amt">{{ rp(s.tax) }}</td></tr>{% endif %}
+      <tr class="total"><td>Total investment</td><td class="amt">{{ rp(s.total|default(0)) }}</td></tr>
+    </table>
+    <div>
+      <div class="card__k" style="color:var(--primary-600)">Payment terms</div>
+      <div class="terms-bar">
+        {% for t in s.terms|default([]) %}<div><div class="p">{{ t.pct }}%</div><div class="l">{{ t.label }}</div></div>{% endfor %}
+      </div>
+      {% if s.note %}<p class="muted" style="font-size:13px; margin-top:18px; line-height:1.5">{{ s.note }}</p>{% endif %}
+    </div>
+  </div>
+  {% else %}<p class="lead" style="margin-top:24px">Investment to be finalised after KOL availability check.</p>{% endif %}
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- WHY THE AGENCY ---------- #}
+{% macro why_agency(s, meta, assets, n, total) %}
+<section class="slide slide--brand">
+  <div class="eyebrow">{{ s.eyebrow|default('Why ' ~ agency.short_name) }}</div>
+  <h2 class="section-title" style="max-width:22ch; font-size:52px">{{ s.statement|default(agency.philosophy) }}</h2>
+  <div class="grid-3" style="margin-top:auto">
+    {% for p in s.pillars|default(agency.pillars) %}
+    <div>
+      <div class="pillar__num" style="color:var(--accent-400)">0{{ loop.index }} · {{ p.label }}</div>
+      <div class="card__b" style="color:rgba(255,255,255,.85); margin-top:8px">{{ p.desc }}</div>
+    </div>
+    {% endfor %}
+  </div>
+  {{ foot(meta, assets, n, total, true) }}
+</section>
+{% endmacro %}
+
+{# ---------- NEXT STEPS / CONTACT ---------- #}
+{% macro next_steps(s, meta, assets, n, total) %}
+<section class="slide slide--dark">
+  <div class="eyebrow">{{ s.eyebrow|default('Next Steps') }}</div>
+  <h2 class="section-title" style="font-size:56px">{{ s.title|default("Let's make " ~ meta.brand ~ " the talk of the town.") }}</h2>
+  <div class="grid-2" style="margin-top:34px; align-items:end">
+    <ul class="ticks">{% for st in s.steps|default([]) %}<li style="color:var(--primary-200)">{{ st }}</li>{% endfor %}</ul>
+    <div class="contact">
+      <b>{{ agency.name }}</b><br>
+      {{ (s.contact and s.contact.address) or agency.contact.address }}<br>
+      IG <b>{{ agency.contact.ig }}</b> · WA {{ (s.contact and s.contact.wa) or agency.contact.wa }}<br>
+      {{ (s.contact and s.contact.email) or agency.contact.email }}
+    </div>
+  </div>
+  {{ foot(meta, assets, n, total, true) }}
+</section>
+{% endmacro %}
+
+{# ---------- INSIDER DATA (we already run your account) ---------- #}
+{% macro insider_data(s, meta, assets, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('What We Already Know') }}</div>
+  <h2 class="section-title" style="max-width:26ch">{{ s.title|default('We already run ' ~ meta.brand ~ "'s socials.") }}</h2>
+  {% if s.intro %}<p class="lead" style="margin-top:12px; max-width:72ch">{{ s.intro }}</p>{% endif %}
+  <div class="insider-metrics">
+    {% for m in s.metrics|default([]) %}
+    <div class="insider-metric"><div class="v">{{ m.value }}</div><div class="l">{{ m.label }}</div>{% if m.sub %}<div class="s">{{ m.sub }}</div>{% endif %}</div>
+    {% endfor %}
+  </div>
+  {% if s.takeaways %}<ul class="ticks" style="margin-top:24px">{% for t in s.takeaways %}<li>{{ t }}</li>{% endfor %}</ul>{% endif %}
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- COMPETITIVE LANDSCAPE (move-centric synthesis) ---------- #}
+{% macro competitive_landscape(s, meta, assets, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('The Landscape') }}</div>
+  <h2 class="section-title" style="max-width:26ch">{{ s.title|default('What we adapt from the landscape') }}</h2>
+  {% if s.landscape %}
+  <div class="landscape-read"><span class="k">What's happening</span> {{ s.landscape }}</div>
+  {% elif s.intro %}<p class="lead" style="margin-top:10px; max-width:74ch; font-size:16px">{{ s.intro }}</p>{% endif %}
+  {% if s.moves %}
+  <div class="move-grid">
+    {% for m in s.moves %}
+    <div class="move-card">
+      <div class="move-n">Move 0{{ loop.index }}</div>
+      <div class="move-h">{{ m.move }}</div>
+      {% if m.why %}<div class="move-why">{{ m.why }}</div>{% endif %}
+      {% if m.seen_in %}<div class="move-seen"><b>Seen in</b> {{ m.seen_in }}{% if m.source %} <span class="src">· {{ m.source }}</span>{% endif %}</div>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  {# backward-compat: old brand-card model #}
+  <div class="comp-grid">
+    {% for b in s.brands|default([]) %}
+    <div class="comp-card">
+      <div class="brand">{{ b.name }}</div>
+      {% if b.adapt %}<div class="adapt"><b>The move we adapt</b>{{ b.adapt }}</div>{% endif %}
+      {% if b.source %}<div class="src">{{ b.source }}</div>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- STORYLINE (the narrative, shown) ---------- #}
+{% macro storyline(s, meta, assets, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('The Storyline') }}</div>
+  <h2 class="section-title">{{ s.title|default('We build narratives — here is the arc') }}
+    {% if s.arc_label %}<span class="muted" style="font-size:20px"> · {{ s.arc_label }}</span>{% endif %}</h2>
+  <div class="storyline">
+    {% for bt in s.beats|default([]) %}
+    <div class="beat">
+      <div class="beat__dot"></div>
+      <div class="beat__name">{{ bt.name }}</div>
+      <div class="beat__what">{{ bt.what }}</div>
+      {% if bt.feeling %}<div class="beat__feel">{{ bt.feeling }}</div>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- CONTENT PILLARS ---------- #}
+{% macro content_pillars(s, meta, assets, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('Content Pillars') }}</div>
+  <h2 class="section-title">{{ s.title|default('What we post, and why') }}</h2>
+  <div class="grid-3" style="margin-top:26px">
+    {% for p in s.pillars|default([]) %}
+    <div class="card">
+      <div class="pillar__num">0{{ loop.index }}</div>
+      <div class="card__t">{{ p.name }}</div>
+      <div class="card__b">{{ p.why }}</div>
+      {% if p.formats %}<div class="chips" style="margin-top:12px">{% for f in p.formats %}<span class="chip">{{ f }}</span>{% endfor %}</div>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- CONTENT CALENDAR ---------- #}
+{% macro content_calendar(s, meta, assets, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('Content Calendar') }}</div>
+  <h2 class="section-title">{{ s.title|default('The plan, day by day') }}</h2>
+  <table class="cal">
+    <tr><th>Day</th><th>Platform</th><th>Format</th><th>Content</th><th>CTA</th></tr>
+    {% for r in s.rows|default([]) %}
+    <tr>
+      <td class="day">{{ r.day }}</td>
+      <td class="fmt">{{ r.platform|default('') }}</td>
+      <td class="fmt">{{ r.format|default('') }}</td>
+      <td>{{ r.content }}</td>
+      <td>{{ r.cta|default('') }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- CONTENT EXAMPLES (real-looking post mockups) ---------- #}
+{% macro content_examples(s, meta, assets, n, total) %}
+{% set handle = meta.ig_handle|default('@' ~ meta.brand_slug|default('brand')) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('Content, Made Concrete') }}</div>
+  <h2 class="section-title">{{ s.title|default('Example posts — not just ideas') }}</h2>
+  <div class="postcards">
+    {% for p in s.posts|default([]) %}
+    {% set ph = p.handle|default(handle) %}
+    <div class="postcard">
+      <div class="pc-head">
+        <div class="pc-av">{{ ph|replace('@','')|first|upper }}</div>
+        <div class="pc-handle">{{ ph }}<span class="pc-sub">{{ p.credit|default('Sponsored') }}</span></div>
+        <div class="pc-fmt">{{ p.platform|default('IG') }} · {{ p.format|default('Reel') }}</div>
+      </div>
+      <div class="pc-visual">
+        {% if p.image and p.image.uri %}<img src="{{ p.image.uri }}">{% if p.image.kind == 'reference' %}<span class="pc-ref">reference</span>{% endif %}<div class="pc-scrim"></div>{% endif %}
+        <div class="pc-concept {% if p.image and p.image.uri %}on-photo{% endif %}">{{ p.concept }}</div>
+      </div>
+      <div class="pc-eng"><span>♥</span><span>💬</span><span>➦</span><span class="pc-save">⤓</span></div>
+      <div class="pc-cap"><b>{{ ph }}</b> {{ p.caption }}</div>
+      {% if p.cta %}<div class="pc-cta">→ {{ p.cta }}</div>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- MOODBOARD ---------- #}
+{% macro moodboard(s, meta, assets, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('Moodboard') }}</div>
+  <h2 class="section-title">{{ s.title|default('The look & feel') }}</h2>
+  <div class="mood">
+    <div class="mood-grid">
+      {% for im in s.images|default([]) %}
+      <div class="mood-img {{ im.span|default('') }}">
+        <img src="{{ im.uri }}">
+        {% if im.kind == 'reference' %}<span class="ref">Reference</span>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    <div class="mood-dir">
+      <div class="k">Direction</div>
+      <h4>{{ s.caption|default('Premium, warm, effortless.') }}</h4>
+      {% if s.swatches %}<div class="swatches">{% for c in s.swatches %}<span class="sw" style="background:{{ c }}"></span>{% endfor %}</div>{% endif %}
+      {% if s.direction %}<ul class="ticks" style="margin-top:6px">{% for d in s.direction %}<li style="font-size:13px">{{ d }}</li>{% endfor %}</ul>{% endif %}
+    </div>
+  </div>
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- SCOPE SUMMARY (pricing-deferred fallback) ---------- #}
+{% macro scope_summary(s, meta, assets, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('Scope & Investment') }}</div>
+  <h2 class="section-title">{{ s.title|default("What's included") }}</h2>
+  <div class="grid-2" style="margin-top:24px; align-items:start; gap:44px">
+    <ul class="ticks">{% for it in s.includes|default([]) %}<li>{{ it }}</li>{% endfor %}</ul>
+    <div class="card">
+      <div class="card__k">Investment</div>
+      <div class="card__t">{{ s.pricing_note|default('Tailored to the final scope.') }}</div>
+      <div class="card__b">{{ s.note|default('A detailed quotation follows once the scope and KOL list are confirmed.') }}</div>
+    </div>
+  </div>
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- TRENDS (stay sharp / up to date) ---------- #}
+{% macro trends(s, meta, assets, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('Trends Now') }}</div>
+  <h2 class="section-title">{{ s.title|default("What's trending — and how we ride it") }}{% if s.as_of %}<span class="muted" style="font-size:18px; font-weight:500"> · as of {{ s.as_of }}</span>{% endif %}</h2>
+  <div class="trend-grid">
+    {% for t in s.trends|default([]) %}
+    <div class="trend-card">
+      <div class="trend-h">{{ t.name }}</div>
+      {% if t.what %}<div class="trend-what">{{ t.what }}</div>{% endif %}
+      {% if t.our_play %}<div class="trend-play"><b>Our play</b>{{ t.our_play }}</div>{% endif %}
+      {% if t.source %}<div class="src">{{ t.source }}</div>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- CONVERSION (what the investment converts into) ---------- #}
+{% macro conversion(s, meta, assets, fmt_stat, n, total) %}
+<section class="slide slide--dark conv">
+  <div class="eyebrow">{{ s.eyebrow|default('The Payoff') }}</div>
+  <h2 class="section-title">{{ s.title|default('What the investment converts into') }}</h2>
+  {% if s.intro %}<p class="conv-intro">{{ s.intro }}</p>{% endif %}
+  <div class="conv-flow">
+    {% for st in s.funnel|default([]) %}
+    <div class="conv-step">
+      <div class="conv-step__stage">{{ st.stage }}</div>
+      <div class="conv-step__metric">{{ fmt_stat(st.metric) }}</div>
+      {% if st.note %}<div class="conv-step__note">{{ st.note }}</div>{% endif %}
+    </div>
+    {% if not loop.last %}<div class="conv-arrow">→</div>{% endif %}
+    {% endfor %}
+  </div>
+  {% if s.assets %}
+  <div class="conv-assets">
+    {% for a in s.assets %}
+    <div class="conv-asset">
+      <div class="conv-asset__t">{{ a.label }}</div>
+      <div class="conv-asset__b">{{ a.desc }}</div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if s.footnote %}<p class="conv-foot">{{ s.footnote }}</p>{% endif %}
+  {{ foot(meta, assets, n, total, true) }}
+</section>
+{% endmacro %}
+
+{# ---------- CAMPAIGN ROUTES (2–3 alternatives + recommendation) ---------- #}
+{% macro campaign_routes(s, meta, assets, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('Campaign Exploration') }}</div>
+  <h2 class="section-title" style="max-width:30ch">{{ s.title|default('One platform. Three routes. One recommendation.') }}</h2>
+  {% if s.intro %}<p class="lead" style="margin-top:10px; max-width:82ch; font-size:16px">{{ s.intro }}</p>{% endif %}
+  <div class="grid-3" style="margin-top:22px; align-items:stretch">
+    {% for r in s.routes|default([]) %}
+    <div class="card">
+      <div class="pillar__num">0{{ loop.index }}{% if r.role %} · {{ r.role }}{% endif %}</div>
+      <div class="card__t" style="margin-top:6px">{{ r.name }}</div>
+      {% if r.line %}<div style="font-family:var(--font-mono); color:var(--color-accent); font-size:13px; margin:4px 0 10px">“{{ r.line }}”</div>{% endif %}
+      {% if r.proposition %}<div class="card__b">{{ r.proposition }}</div>{% endif %}
+      {% if r.best_for %}<div class="card__b" style="margin-top:8px; font-size:13px; color:var(--text-muted)"><b>Best for:</b> {{ r.best_for }}</div>{% endif %}
+      {% if r.note %}<div class="card__b" style="margin-top:8px; font-size:13px; color:var(--text-muted)">{{ r.note }}</div>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- KPI FRAMEWORK (targets beside assumptions, provenance-tagged) ---------- #}
+{% macro kpi(s, meta, assets, fmt_stat, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('KPI & Measurement') }}</div>
+  <h2 class="section-title">{{ s.title|default('Concrete targets, honest assumptions') }}</h2>
+  <div class="grid-2" style="margin-top:22px; align-items:start; gap:44px">
+    <div>
+      <div class="card__k" style="color:var(--primary-600)">{{ s.assumptions_label|default('Planning assumptions') }}</div>
+      <table class="invest" style="margin-top:8px">
+        {% for a in s.assumptions|default([]) %}
+        <tr><td>{{ a.label }}</td><td class="amt" style="font-size:15px">{{ a.value }}</td></tr>
+        {% endfor %}
+      </table>
+    </div>
+    <div>
+      <div class="card__k" style="color:var(--primary-600)">{{ s.targets_label|default('Launch-season targets') }}</div>
+      <table class="invest" style="margin-top:8px">
+        {% for t in s.targets|default([]) %}
+        <tr><td>{{ t.label }}</td><td class="amt" style="font-size:15px">{{ fmt_stat(t.metric) }}</td></tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+  {% if s.footnote %}<p class="muted" style="font-size:13px; margin-top:16px; line-height:1.5; max-width:94ch">{{ s.footnote }}</p>{% endif %}
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- DATA TABLE (generic activation table: venues, KOL matrix, comparisons) ---------- #}
+{% macro pie_chart(s, meta, assets, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('') }}</div>
+  <h2 class="section-title" style="max-width:30ch">{{ s.title|default('') }}</h2>
+  {% if s.intro %}<p class="lead" style="margin-top:10px;max-width:82ch;font-size:16px">{{ s.intro }}</p>{% endif %}
+  {%- set ns = namespace(acc=0, grad='') -%}
+  {%- for sl in s.slices -%}
+    {%- set start = ns.acc -%}{%- set ns.acc = ns.acc + sl.pct -%}
+    {%- set ns.grad = ns.grad ~ sl.color ~ ' ' ~ start ~ '% ' ~ ns.acc ~ '%' ~ ('' if loop.last else ', ') -%}
+  {%- endfor -%}
+  <div style="display:flex;flex-wrap:wrap;gap:56px;align-items:center;margin-top:30px">
+    <div style="width:300px;height:300px;border-radius:50%;flex:none;background:conic-gradient({{ ns.grad }})"></div>
+    <div style="flex:1;min-width:300px;display:grid;gap:18px">
+      {%- for sl in s.slices %}
+      <div style="display:flex;align-items:center;gap:16px;font-size:22px"><span style="width:20px;height:20px;border-radius:5px;background:{{ sl.color }};flex:none"></span><b style="min-width:170px;display:inline-block;font-family:var(--font-display)">{{ sl.label }}</b><span style="font-variant-numeric:tabular-nums;color:var(--text-muted)">{{ sl.pct_label|default(sl.pct ~ '%') }}</span></div>
+      {%- endfor %}
+    </div>
+  </div>
+  {% if s.note %}<p class="muted" style="font-size:13.5px;margin-top:24px;max-width:92ch;line-height:1.55">{{ s.note }}</p>{% endif %}
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{% macro data_table(s, meta, assets, n, total) %}
+<section class="slide">
+  <div class="eyebrow">{{ s.eyebrow|default('Details') }}</div>
+  <h2 class="section-title" style="max-width:30ch">{{ s.title|default('') }}</h2>
+  {% if s.intro %}<p class="lead" style="margin-top:10px; max-width:84ch; font-size:16px">{{ s.intro }}</p>{% endif %}
+  <table class="cal" style="margin-top:20px">
+    <tr>{% for c in s.columns|default([]) %}<th>{{ c }}</th>{% endfor %}</tr>
+    {% for row in s.rows|default([]) %}
+    <tr>{% for cell in row %}<td{% if loop.first %} class="day"{% endif %}>{{ cell }}</td>{% endfor %}</tr>
+    {% endfor %}
+  </table>
+  {% if s.note %}<p class="muted" style="font-size:13px; margin-top:14px; line-height:1.5; max-width:98ch">{{ s.note }}</p>{% endif %}
+  {{ foot(meta, assets, n, total) }}
+</section>
+{% endmacro %}
+
+{# ---------- DISPATCHER ---------- #}
+{% macro render(s, meta, assets, fmt_stat, rp, n, total) %}
+{%- if s.type == 'cover' %}{{ cover(s, meta, assets, n, total) }}
+{%- elif s.type == 'about_agency' %}{{ about_agency(s, meta, assets, n, total) }}
+{%- elif s.type == 'understanding_brand' %}{{ understanding_brand(s, meta, assets, n, total) }}
+{%- elif s.type == 'insider_data' %}{{ insider_data(s, meta, assets, n, total) }}
+{%- elif s.type == 'competitive_landscape' %}{{ competitive_landscape(s, meta, assets, n, total) }}
+{%- elif s.type == 'trends' %}{{ trends(s, meta, assets, n, total) }}
+{%- elif s.type == 'big_idea' %}{{ big_idea(s, meta, assets, n, total) }}
+{%- elif s.type == 'storyline' %}{{ storyline(s, meta, assets, n, total) }}
+{%- elif s.type == 'campaign_routes' %}{{ campaign_routes(s, meta, assets, n, total) }}
+{%- elif s.type == 'kpi' %}{{ kpi(s, meta, assets, fmt_stat, n, total) }}
+{%- elif s.type == 'data_table' %}{{ data_table(s, meta, assets, n, total) }}
+{%- elif s.type == 'pie_chart' %}{{ pie_chart(s, meta, assets, n, total) }}
+{%- elif s.type == 'strategic_approach' %}{{ strategic_approach(s, meta, assets, n, total) }}
+{%- elif s.type == 'content_pillars' %}{{ content_pillars(s, meta, assets, n, total) }}
+{%- elif s.type == 'content_calendar' %}{{ content_calendar(s, meta, assets, n, total) }}
+{%- elif s.type == 'content_examples' %}{{ content_examples(s, meta, assets, n, total) }}
+{%- elif s.type == 'moodboard' %}{{ moodboard(s, meta, assets, n, total) }}
+{%- elif s.type == 'scope_summary' %}{{ scope_summary(s, meta, assets, n, total) }}
+{%- elif s.type == 'phases_timeline' %}{{ phases_timeline(s, meta, assets, n, total) }}
+{%- elif s.type == 'service_breakdown' %}{{ service_breakdown(s, meta, assets, n, total) }}
+{%- elif s.type == 'proposed_kols' %}{{ proposed_kols(s, meta, assets, fmt_stat, n, total) }}
+{%- elif s.type == 'creative_crew' %}{{ creative_crew(s, meta, assets, n, total) }}
+{%- elif s.type == 'deliverables' %}{{ deliverables(s, meta, assets, n, total) }}
+{%- elif s.type == 'campaign_wins' %}{{ campaign_wins(s, meta, assets, fmt_stat, n, total) }}
+{%- elif s.type == 'investment' %}{{ investment(s, meta, assets, fmt_stat, rp, n, total) }}
+{%- elif s.type == 'conversion' %}{{ conversion(s, meta, assets, fmt_stat, n, total) }}
+{%- elif s.type == 'why_agency' %}{{ why_agency(s, meta, assets, n, total) }}
+{%- elif s.type == 'next_steps' %}{{ next_steps(s, meta, assets, n, total) }}
+{%- else %}<section class="slide"><div class="eyebrow">Unknown slide</div><h2 class="section-title">Unsupported slide type: {{ s.type }}</h2></section>
+{%- endif %}
+{% endmacro %}

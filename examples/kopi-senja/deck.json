@@ -1,0 +1,477 @@
+{
+  "meta": {
+    "brand": "Kopi Senja",
+    "brand_slug": "kopi-senja",
+    "campaign_title": "Stay for the Golden Hour",
+    "date": "October 2026",
+    "language": "en",
+    "accent_hex": "#D9822B",
+    "ig_handle": "@kopisenja.demo",
+    "mode": "cold",
+    "tagline": "A fictional coffee chain, used to demo the pipeline end to end."
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "eyebrow": "Campaign Proposal · Sample",
+      "title": "Stay for the Golden Hour",
+      "subtitle": "A 6-week narrative campaign that turns Kopi Senja's 4–7pm slump into the city's favourite after-work ritual."
+    },
+    {
+      "type": "about_agency",
+      "blurb": "A narrative-first creative studio in Jakarta. We start from an insight, name the idea, then put creators, content and events behind it.",
+      "services": [
+        {
+          "name": "Influencer Marketing",
+          "tagline": "The right creators, briefed and supervised end to end.",
+          "active": true
+        },
+        {
+          "name": "Creative Strategy",
+          "tagline": "Direction and always-on social that converts.",
+          "active": true
+        },
+        {
+          "name": "Content Production",
+          "tagline": "Full crew, from concept to final cut.",
+          "active": true
+        },
+        {
+          "name": "Events & Activations",
+          "tagline": "Experiences that put the brand in the room.",
+          "active": true
+        }
+      ]
+    },
+    {
+      "type": "understanding_brand",
+      "title": "Busy at 8am. Empty by 5pm.",
+      "body": "Kopi Senja (fictional) runs 12 neighbourhood outlets. Mornings are a commuter rush; the afternoon is quiet even though the brand is literally named after dusk. The name is an unused asset.",
+      "points": [
+        "Morning traffic is price-driven and loyal to whoever is closest",
+        "Afternoons compete with malls, gyms and the commute home",
+        "The name 'senja' (dusk) already carries a feeling people post about",
+        "Goal: make 4–7pm a reason to visit, not a gap to fill with discounts"
+      ]
+    },
+    {
+      "type": "big_idea",
+      "idea_name": "Golden Hour Club",
+      "tagline": "The best part of the day starts when work ends.",
+      "narrative": "We reposition Kopi Senja from a commuter pit-stop to the city's after-work ritual. Every outlet becomes a 'golden hour' spot: warm light, a dusk-only menu, and creators who make 5pm the moment you look forward to.",
+      "hook": "Clock out, glow up — see you at Senja."
+    },
+    {
+      "type": "storyline",
+      "arc_label": "6 weeks, 4 beats",
+      "beats": [
+        {
+          "name": "Tease",
+          "what": "Creators post their 'unplanned 5pm' — sunsets, commutes, the itch to stop somewhere.",
+          "feeling": "That's me."
+        },
+        {
+          "name": "Reveal",
+          "what": "Golden Hour Club launches: dusk-only menu, warm-light corners, a stamp card that only works after 4pm.",
+          "feeling": "Wait, where is that?"
+        },
+        {
+          "name": "Ritual",
+          "what": "Weekly creator meet-ups and 'clock-out' playlists turn visits into a habit.",
+          "feeling": "This is my spot."
+        },
+        {
+          "name": "Belong",
+          "what": "Regulars' stories become the content; the best ones get their own drink named after them.",
+          "feeling": "I'm part of this."
+        }
+      ]
+    },
+    {
+      "type": "strategic_approach",
+      "framework": "Tease → Launch → Sustain",
+      "pillars": [
+        {
+          "label": "Own a time slot",
+          "desc": "Every asset says 4–7pm. We sell a moment, not a menu."
+        },
+        {
+          "label": "Creators as regulars",
+          "desc": "Micro creators who live near outlets post repeatedly, not once — repetition builds the ritual."
+        },
+        {
+          "label": "Make it physical",
+          "desc": "Light, playlist and stamp card make the idea visible in-store, so content and reality match."
+        }
+      ]
+    },
+    {
+      "type": "content_calendar",
+      "title": "The first two weeks, day by day",
+      "rows": [
+        {
+          "day": "Day 1–3",
+          "platform": "TikTok",
+          "format": "POV reel",
+          "content": "'My 5pm vs. my 5pm at Senja' — 3 creators",
+          "cta": "Follow for the reveal"
+        },
+        {
+          "day": "Day 4",
+          "platform": "IG",
+          "format": "Carousel",
+          "content": "Golden Hour Club announcement + dusk menu",
+          "cta": "Save the date"
+        },
+        {
+          "day": "Day 5",
+          "platform": "IG + TikTok",
+          "format": "Live / event",
+          "content": "Launch night at the flagship outlet",
+          "cta": "RSVP via link"
+        },
+        {
+          "day": "Day 6–10",
+          "platform": "TikTok",
+          "format": "UGC",
+          "content": "Creators' clock-out routines ending at their nearest outlet",
+          "cta": "Stamp card"
+        },
+        {
+          "day": "Day 11–14",
+          "platform": "IG",
+          "format": "Story series",
+          "content": "Regulars of the week + playlist drop",
+          "cta": "Tag your 5pm crew"
+        }
+      ]
+    },
+    {
+      "type": "content_examples",
+      "title": "Example posts — ready to brief",
+      "posts": [
+        {
+          "platform": "TikTok",
+          "format": "Reel",
+          "concept": "Laptop closes. Cut to golden light on an iced aren latte.",
+          "caption": "jam 5 tepat. laptop tutup, senja dimulai ☀️ #GoldenHourClub",
+          "cta": "Find your nearest Senja"
+        },
+        {
+          "platform": "IG",
+          "format": "Carousel",
+          "concept": "The dusk-only menu, one drink per slide, shot at sunset.",
+          "caption": "Four drinks you can only order after 4pm. Which one is yours?",
+          "cta": "Save for after work"
+        },
+        {
+          "platform": "IG",
+          "format": "Story",
+          "concept": "Stamp card: 5 golden-hour visits = a drink named after you.",
+          "caption": "Your name could be on our menu. Start stamping today.",
+          "cta": "Swipe for the rules"
+        }
+      ]
+    },
+    {
+      "type": "service_breakdown",
+      "services": [
+        {
+          "name": "Influencer Marketing",
+          "tagline": "Neighbourhood creators as regulars.",
+          "deliverables": [
+            "Creator shortlist + briefing",
+            "3 posting waves over 6 weeks",
+            "Weekly performance report"
+          ]
+        },
+        {
+          "name": "Creative Strategy & Social",
+          "tagline": "One idea across every channel.",
+          "deliverables": [
+            "Campaign identity + copy system",
+            "Always-on IG/TikTok for 6 weeks",
+            "Community management"
+          ]
+        },
+        {
+          "name": "Content Production",
+          "tagline": "Golden-hour shoots at 3 outlets.",
+          "deliverables": [
+            "1 shoot day per outlet",
+            "12 short-form edits",
+            "Menu photography"
+          ]
+        },
+        {
+          "name": "Events & Activations",
+          "tagline": "Launch night + weekly meet-ups.",
+          "deliverables": [
+            "Flagship launch night",
+            "4 creator meet-ups",
+            "In-store light + playlist kit"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "proposed_kols",
+      "title": "Creators who already live the 5pm moment",
+      "kols": [
+        {
+          "name": "Rara Demo",
+          "handle": "@demo.creator01",
+          "tier": "Nano",
+          "reach": {
+            "value": 4000,
+            "provenance": "estimate",
+            "unit": "reach/post"
+          },
+          "fit": "Coffee diaries, posts from cafés near two outlets",
+          "proof": "Roster · vetted (sample)"
+        },
+        {
+          "name": "Fajar Demo",
+          "handle": "@demo.creator12",
+          "tier": "Mikro",
+          "reach": {
+            "value": 20000,
+            "provenance": "estimate",
+            "unit": "reach/post"
+          },
+          "fit": "Commute + work-from-café vlogs",
+          "proof": "Roster · vetted (sample)"
+        },
+        {
+          "name": "Putri Demo",
+          "handle": "@demo.creator09",
+          "tier": "Mikro",
+          "reach": {
+            "value": 20000,
+            "provenance": "estimate",
+            "unit": "reach/post"
+          },
+          "fit": "Aesthetic coffee + sunset photography",
+          "proof": "Roster · vetted (sample)"
+        },
+        {
+          "name": "Salsa Demo",
+          "handle": "@demo.creator21",
+          "tier": "Mikro",
+          "reach": {
+            "value": 20000,
+            "provenance": "estimate",
+            "unit": "reach/post"
+          },
+          "fit": "After-work hangout content with friends",
+          "proof": "Roster · vetted (sample)"
+        },
+        {
+          "name": "Rangga Demo",
+          "handle": "@demo.creator20",
+          "tier": "Makro",
+          "reach": {
+            "value": 120000,
+            "provenance": "estimate",
+            "unit": "reach/post"
+          },
+          "fit": "Food-culture anchor for launch week",
+          "proof": "Roster · rate to confirm"
+        },
+        {
+          "name": "Nova Demo",
+          "handle": "@demo.fresh01",
+          "tier": "Mikro",
+          "reach": {
+            "value": 15000,
+            "provenance": "estimate",
+            "unit": "reach/post"
+          },
+          "fit": "Fresh face: sunset-chasing city walks",
+          "proof": "Web-sourced · to vet"
+        }
+      ],
+      "stat_strip": [
+        {
+          "label": "Platforms",
+          "value": "IG + TikTok"
+        },
+        {
+          "label": "Creators",
+          "value": "6"
+        },
+        {
+          "label": "Tiers",
+          "value": "Nano → Makro"
+        },
+        {
+          "label": "Audience",
+          "value": "Office workers 22–34"
+        }
+      ]
+    },
+    {
+      "type": "campaign_wins",
+      "title": "Sample proof: F&B campaigns that beat target",
+      "wins": [
+        {
+          "brand": "Sample Brand C (fictional)",
+          "metric": {
+            "value": 176000,
+            "provenance": "verified",
+            "unit": "views"
+          },
+          "goal": {
+            "value": 80000,
+            "provenance": "verified",
+            "unit": "views"
+          },
+          "mult": "2.2x",
+          "kols": "4"
+        },
+        {
+          "brand": "Sample Brand A (fictional)",
+          "metric": {
+            "value": 512000,
+            "provenance": "verified",
+            "unit": "views"
+          },
+          "goal": {
+            "value": 300000,
+            "provenance": "verified",
+            "unit": "views"
+          },
+          "mult": "1.7x",
+          "kols": "8"
+        },
+        {
+          "brand": "Sample Brand B (fictional)",
+          "metric": {
+            "value": 204000,
+            "provenance": "verified",
+            "unit": "views"
+          },
+          "goal": {
+            "value": 150000,
+            "provenance": "verified",
+            "unit": "views"
+          },
+          "mult": "1.4x",
+          "kols": "5"
+        }
+      ]
+    },
+    {
+      "type": "kpi",
+      "title": "Concrete targets, honest assumptions",
+      "assumptions": [
+        {
+          "label": "Creators",
+          "value": "6 (5 roster + 1 to vet)"
+        },
+        {
+          "label": "Posts",
+          "value": "18 across 3 waves"
+        },
+        {
+          "label": "Reach basis",
+          "value": "tier bands (est.)"
+        }
+      ],
+      "targets": [
+        {
+          "label": "Campaign views",
+          "metric": {
+            "value": 600000,
+            "provenance": "target",
+            "unit": "views"
+          }
+        },
+        {
+          "label": "Est. unique reach",
+          "metric": {
+            "value": 250000,
+            "provenance": "estimate",
+            "unit": "people"
+          }
+        },
+        {
+          "label": "4–7pm transactions uplift",
+          "metric": {
+            "value": "+25%",
+            "provenance": "target"
+          }
+        },
+        {
+          "label": "Stamp-card sign-ups",
+          "metric": {
+            "value": 3000,
+            "provenance": "target",
+            "unit": "members"
+          }
+        }
+      ],
+      "footnote": "Targets are projections benchmarked against the sample F&B wins; estimates come from tier reach bands. All numbers in this example are fictional."
+    },
+    {
+      "type": "investment",
+      "title": "The investment (sample pricing)",
+      "line_items": [
+        {
+          "label": "Creator fees — 4 roster creators",
+          "amount": 8500000
+        },
+        {
+          "label": "Makro anchor creator (rate to confirm)",
+          "amount": 12000000,
+          "provenance": "estimate"
+        },
+        {
+          "label": "Content production (3 shoot days)",
+          "amount": 18000000
+        },
+        {
+          "label": "Creative strategy & social (6 weeks)",
+          "amount": 15000000
+        },
+        {
+          "label": "Launch night + meet-ups",
+          "amount": 10000000
+        }
+      ],
+      "agency_fee_pct": 12,
+      "agency_fee": 7620000,
+      "tax_label": "Tax (sample 2%)",
+      "tax": 1422400,
+      "total": 72542400,
+      "terms": [
+        {
+          "pct": 50,
+          "label": "Kick-off"
+        },
+        {
+          "pct": 30,
+          "label": "Mid-campaign"
+        },
+        {
+          "pct": 20,
+          "label": "Final"
+        }
+      ],
+      "note": "Sample pricing for a fictional brand. Final quote after creator availability check."
+    },
+    {
+      "type": "why_agency"
+    },
+    {
+      "type": "next_steps",
+      "title": "Let's make 5pm the best hour in town.",
+      "steps": [
+        "Pick the outlets for the launch wave",
+        "Confirm creator availability + anchor rate",
+        "Lock the dusk menu and shoot dates",
+        "Kick off within 7 days of sign-off"
+      ]
+    }
+  ]
+}

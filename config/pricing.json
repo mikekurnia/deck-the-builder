@@ -1,0 +1,34 @@
+{
+  "_comment": "SAMPLE pricing frame for the fictional agency. All modifiers are illustrative, not anyone's real commercial terms. The Investment slide is built from roster rates (where present) plus these modifiers.",
+  "sample_data": true,
+  "currency": "IDR",
+  "agency_fee_pct": 12,
+  "tax_pct": 2,
+  "tax_label": "Tax (sample 2%)",
+  "payment_terms": [
+    {
+      "label": "Kick-off",
+      "pct": 50,
+      "when": "on agreement"
+    },
+    {
+      "label": "Mid-campaign",
+      "pct": 30,
+      "when": "at first content release"
+    },
+    {
+      "label": "Final",
+      "pct": 20,
+      "when": "on final report"
+    }
+  ],
+  "line_item_categories": [
+    "Creator fees",
+    "Content production (photo/video)",
+    "Creative & social management",
+    "Event & venue",
+    "Printables & brand materials",
+    "Web development"
+  ],
+  "notes": "All figures in IDR (Rp). Roster rates where available; anything estimated is labeled 'est.'. Final quotation confirmed after creator availability check."
+}

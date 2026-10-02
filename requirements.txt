@@ -1,0 +1,8 @@
+# Deck the Builder — Proposal Factory dependencies
+# python3.12 -m venv .venv && ./.venv/bin/pip install -r requirements.txt && ./.venv/bin/python -m playwright install chromium
+python-pptx==1.0.2      # PPTX output (image-matched + Canva-editable)
+jinja2==3.1.4           # render HTML slide partials from deck.json
+jsonschema==4.23.0      # validate deck.json against schema/deck.schema.json
+playwright==1.48.0      # HTML -> PDF / slide renders via headless Chromium
+pillow==11.0.0          # image downscaling + generated brand assets
+pytest==8.3.3           # dev only: ./.venv/bin/python -m pytest tests/ -q

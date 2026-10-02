@@ -1,0 +1,4 @@
+name,role,style,rate_idr,city,contact,status,notes
+"Demo Photographer",Photographer,"editorial / product / lifestyle",,Jakarta,,example,"FICTIONAL sample row. Leave rate_idr blank until a real quote exists."
+"Demo Videographer",Videographer,"handheld documentary / short-form vertical",,Jakarta,,example,"FICTIONAL sample row."
+"Demo Editor",Video Editor,"fast-cut reels, subtitle-first",,Jakarta,,example,"FICTIONAL sample row."

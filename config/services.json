@@ -1,0 +1,69 @@
+{
+  "_comment": "The agency's service lines (fictional demo agency). 'key' is the stable id used in deck_structure.json.",
+  "services": [
+    {
+      "key": "kol",
+      "name": "Influencer Marketing",
+      "brief_label": "KOL Marketing",
+      "icon": "megaphone",
+      "tagline": "The right creators, briefed and supervised end to end.",
+      "deliverables": [
+        "Strategy & Ideation",
+        "Campaign Management (KOL listing, briefing, supervision & reporting)",
+        "Payment Handling",
+        "Live TikTok / Live strategy",
+        "Affiliate Marketing"
+      ]
+    },
+    {
+      "key": "creative",
+      "name": "Creative Strategy",
+      "brief_label": "Social Media Management",
+      "icon": "lightbulb",
+      "tagline": "Direction and always-on social that actually converts.",
+      "deliverables": [
+        "Creative & Strategic Direction",
+        "Social Media Management (feed + stories cadence)",
+        "Campaign Reporting"
+      ]
+    },
+    {
+      "key": "content",
+      "name": "Creative Content Production",
+      "brief_label": "Content Production",
+      "icon": "clapperboard",
+      "tagline": "Full crew, from concept to final cut.",
+      "deliverables": [
+        "Models & Talent Sourcing",
+        "Make-Up Artist & Hairdo Team",
+        "Photographer & Videographer",
+        "Editing & Post-production"
+      ]
+    },
+    {
+      "key": "events",
+      "name": "Events Visit Organizer",
+      "brief_label": "Event Organizing",
+      "icon": "calendar-check",
+      "tagline": "Experiences that put your brand in the room.",
+      "deliverables": [
+        "Brand-to-brand collaborations for co-marketing",
+        "Media partners, photo/video and contractors for events",
+        "KOL visits and on-site activation"
+      ]
+    },
+    {
+      "key": "web",
+      "name": "Web Development",
+      "brief_label": "Web Development",
+      "icon": "code-2",
+      "tagline": "A home for the brand that works on every device.",
+      "deliverables": [
+        "Custom Website (maintenance & updates)",
+        "Landing Page",
+        "Company Profile",
+        "Responsive design for all devices"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="{{ meta.language|default('en') }}">
+<head>
+<meta charset="utf-8">
+<title>{{ meta.brand }} × {{ agency.name }} — {{ meta.campaign_title }}</title>
+<style>
+@font-face { font-family:'Plus Jakarta Sans'; font-weight:200 800; font-style:normal;
+  src:url('{{ assets.font_pjs }}') format('truetype'); }
+@font-face { font-family:'Space Mono'; font-weight:400; font-style:normal;
+  src:url('{{ assets.font_mono }}') format('truetype'); }
+@font-face { font-family:'Space Mono'; font-weight:700; font-style:normal;
+  src:url('{{ assets.font_mono_bold }}') format('truetype'); }
+
+{{ tokens_css|safe }}
+{{ deck_css|safe }}
+
+:root{
+  --contour-src: url('{{ assets.texture }}');
+  --accent-client: {{ meta.accent_hex|default('var(--accent-500)') }};
+  --color-accent: {{ meta.accent2_hex|default('var(--accent-500)') }};
+}
+{% if meta.accent2_hex %}.cal th, .accent, .win__metric { color: {{ meta.accent2_hex }} !important; }{% endif %}
+@page { size: 1280px 720px; margin: 0; }
+</style>
+</head>
+<body>
+{% import 'slides/_macros.html.j2' as m with context %}
+{% for s in slides %}{{ m.render(s, meta, assets, fmt_stat, rp, loop.index, loop.length) }}{% endfor %}
+</body>
+</html>
